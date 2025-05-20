@@ -36,6 +36,14 @@
     --ring: 215 28% 30%;
 
     --radius: 0.5rem;
+    
+    /* Custom colors based on the palette */
+    --light-cyan: #E0FFFF;
+    --muted-blue-gray: #668794;
+    --dark-navy: #121C28;
+    --dark-blue: #283B4D;
+    --light-gray: #B3B3B3;
+    --dark-blue-gray: #1A2C3B;
   }
 }
 
@@ -45,33 +53,33 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-dark-navy text-foreground font-inter;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 .nav-link {
-  @apply hover:text-primary transition-colors duration-200;
+  @apply hover:text-light-cyan transition-colors duration-200;
 }
 
 .contact-btn {
-  @apply bg-secondary hover:bg-[#283B4D] transition-colors duration-200 text-white px-4 py-2 rounded;
+  @apply bg-dark-blue hover:bg-[#283B4D] transition-colors duration-200 text-white px-4 py-2 rounded;
 }
 
 .primary-btn {
-  @apply bg-primary hover:bg-[#283B4D] transition-colors duration-200 text-white px-6 py-2.5 rounded flex items-center gap-2;
+  @apply bg-dark-blue-gray hover:bg-dark-blue transition-colors duration-200 text-light-cyan px-6 py-2.5 rounded flex items-center gap-2 border border-light-cyan;
 }
 
 .outline-btn {
-  @apply border border-primary hover:bg-[#283B4D] hover:border-[#283B4D] transition-colors duration-200 text-white px-6 py-2.5 rounded flex items-center gap-2;
+  @apply border border-light-cyan hover:bg-dark-blue transition-colors duration-200 text-light-cyan px-6 py-2.5 rounded flex items-center gap-2;
 }
 
 .project-card {
-  @apply bg-card p-6 rounded-lg transition-all duration-200 hover:bg-[#3C4755];
+  @apply bg-dark-navy p-6 rounded-lg border border-dark-blue-gray transition-all duration-200 hover:bg-[#3C4755] text-light-gray;
 }
 
 .section-title {
-  @apply text-3xl font-bold mb-2 md:text-4xl;
+  @apply text-3xl font-bold mb-2 md:text-4xl text-light-cyan;
 }
 
 .typing-animation {
@@ -108,3 +116,4 @@
 .timeline-circle {
   @apply absolute w-4 h-4 rounded-full bg-primary border-4 border-background z-10;
 }
+

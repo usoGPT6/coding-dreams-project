@@ -53,6 +53,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom colors based on the palette
+        "light-cyan": "#E0FFFF",
+        "muted-blue-gray": "#668794",
+        "dark-navy": "#121C28",
+        "dark-blue": "#283B4D",
+        "light-gray": "#B3B3B3",
+        "dark-blue-gray": "#1A2C3B",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

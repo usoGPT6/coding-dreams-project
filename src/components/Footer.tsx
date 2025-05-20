@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="w-full py-4 px-6 md:px-12 mt-12 border-t border-border">
+    <footer className="w-full py-4 px-6 md:px-12 mt-12 border-t border-border bg-dark-navy">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0">
           <img 
@@ -14,7 +14,7 @@ const Footer = () => {
             className="h-6 w-6"
           />
         </div>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-muted-blue-gray">
           © {currentYear} Eduardo A Lins. All rights reserved.
         </div>
       </div>

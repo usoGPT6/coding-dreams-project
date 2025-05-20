@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   
   return (
-    <header className="w-full py-4 px-6 md:px-12">
+    <header className="w-full py-4 px-6 md:px-12 bg-dark-navy">
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img 
@@ -20,19 +20,19 @@ const Navbar = () => {
         <nav className="flex items-center space-x-6">
           <Link 
             to="/" 
-            className={`nav-link ${location.pathname === '/' ? 'text-white' : 'text-muted-foreground'}`}
+            className={`nav-link ${location.pathname === '/' ? 'text-light-cyan' : 'text-muted-blue-gray'}`}
           >
             Home
           </Link>
           <Link 
             to="/about" 
-            className={`nav-link ${location.pathname === '/about' ? 'text-white' : 'text-muted-foreground'}`}
+            className={`nav-link ${location.pathname === '/about' ? 'text-light-cyan' : 'text-muted-blue-gray'}`}
           >
             About
           </Link>
           <Link 
             to="/projects" 
-            className={`nav-link ${location.pathname === '/projects' ? 'text-white' : 'text-muted-foreground'}`}
+            className={`nav-link ${location.pathname === '/projects' ? 'text-light-cyan' : 'text-muted-blue-gray'}`}
           >
             Projects
           </Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
             href="https://github.com/devsuperior" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="nav-link"
+            className="nav-link text-muted-blue-gray hover:text-light-cyan"
           >
             <Github size={20} />
           </a>
@@ -48,7 +48,7 @@ const Navbar = () => {
             href="https://www.linkedin.com/feed/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="nav-link"
+            className="nav-link text-muted-blue-gray hover:text-light-cyan"
           >
             <Linkedin size={20} />
           </a>
