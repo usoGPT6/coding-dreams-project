@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -70,21 +69,18 @@ const Index = () => {
           <h2 className="section-title mb-2">Projects</h2>
           <p className="text-muted-blue-gray mb-6">Some things I've built recently</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <ProjectCard 
-              title="WikiTrivia" 
-              description="A game developed in Javascript by me and my fellow interns."
-              repoUrl="https://github.com/devsuperior1"
-            />
-            <ProjectCard 
-              title="PintOS-AlarmClock" 
-              description="This project enhances PintOS by implementing an alarm clock mechanism."
-              repoUrl="https://github.com/devsuperior2"
-            />
-            <ProjectCard 
-              title="AybiPalace" 
-              description="A mini application focusing on Flutter, without a backend."
-              repoUrl="https://github.com/devsuperior3"
-            />
+            <div className="home-project-card">
+              <h3 className="text-lg font-medium mb-2">WikiTrivia</h3>
+              <p className="text-muted-foreground text-sm">A game developed in Javascript by me and my fellow interns.</p>
+            </div>
+            <div className="home-project-card">
+              <h3 className="text-lg font-medium mb-2">PintOS-AlarmClock</h3>
+              <p className="text-muted-foreground text-sm">This project enhances PintOS by implementing an alarm clock mechanism.</p>
+            </div>
+            <div className="home-project-card">
+              <h3 className="text-lg font-medium mb-2">AybiPalace</h3>
+              <p className="text-muted-foreground text-sm">A mini application focusing on Flutter, without a backend.</p>
+            </div>
           </div>
           <div className="flex justify-end">
             <Link to="/projects" className="text-light-cyan flex items-center gap-2 hover:text-primary transition-colors border border-light-cyan px-3 py-1 rounded">

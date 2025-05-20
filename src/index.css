@@ -78,6 +78,11 @@
   @apply bg-dark-navy p-6 rounded-lg border-2 border-light-gray transition-all duration-200 hover:bg-[#3C4755] text-light-gray;
 }
 
+/* Specific for home page project cards */
+.home-project-card {
+  @apply bg-dark-navy p-6 rounded-lg border-2 border-light-gray transition-all duration-200 hover:bg-[#3C4755] text-light-gray;
+}
+
 .section-title {
   @apply text-3xl font-bold mb-2 md:text-4xl text-light-cyan;
 }
