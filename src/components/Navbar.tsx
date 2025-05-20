@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   
   return (
-    <header className="w-full py-4 px-6 md:px-12 bg-dark-navy">
+    <header className="sticky top-0 z-50 w-full py-4 px-6 md:px-12 bg-dark-navy">
       <div className="flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img 
@@ -54,7 +54,7 @@ const Navbar = () => {
           </a>
           <Link 
             to="/contact" 
-            className="contact-btn"
+            className="bg-dark-navy border border-light-cyan text-light-cyan hover:bg-dark-blue transition-colors duration-200 px-4 py-2 rounded"
           >
             Contact Me
           </Link>

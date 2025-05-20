@@ -67,7 +67,8 @@ const Index = () => {
       {/* Projects Section */}
       <section className="py-16 px-6 md:px-12 bg-dark-navy">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-title mb-8">Projects</h2>
+          <h2 className="section-title mb-2">Projects</h2>
+          <p className="text-muted-blue-gray mb-6">Some things I've built recently</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <ProjectCard 
               title="WikiTrivia" 
@@ -86,7 +87,7 @@ const Index = () => {
             />
           </div>
           <div className="flex justify-end">
-            <Link to="/projects" className="text-light-cyan flex items-center gap-2 hover:text-primary transition-colors">
+            <Link to="/projects" className="text-light-cyan flex items-center gap-2 hover:text-primary transition-colors border border-light-cyan px-3 py-1 rounded">
               View All <ArrowRight size={16} />
             </Link>
           </div>
@@ -100,7 +101,7 @@ const Index = () => {
           <p className="text-muted-blue-gray mb-6">
             I'm ready to apply my skills to your project, creating elegant solutions for complex problems.
           </p>
-          <Link to="/contact" className="primary-btn mx-auto inline-flex">
+          <Link to="/contact" className="inline-flex items-center justify-center border border-light-cyan text-light-cyan bg-dark-blue-gray hover:bg-dark-blue transition-colors duration-200 px-6 py-2.5 rounded">
             Get In Touch
           </Link>
         </div>

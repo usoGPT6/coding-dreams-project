@@ -63,7 +63,7 @@
 }
 
 .contact-btn {
-  @apply bg-dark-blue hover:bg-[#283B4D] transition-colors duration-200 text-white px-4 py-2 rounded;
+  @apply bg-dark-navy border border-light-cyan text-light-cyan hover:bg-dark-blue transition-colors duration-200 px-4 py-2 rounded;
 }
 
 .primary-btn {
@@ -75,7 +75,7 @@
 }
 
 .project-card {
-  @apply bg-dark-navy p-6 rounded-lg border border-dark-blue-gray transition-all duration-200 hover:bg-[#3C4755] text-light-gray;
+  @apply bg-dark-navy p-6 rounded-lg border-2 border-light-gray transition-all duration-200 hover:bg-[#3C4755] text-light-gray;
 }
 
 .section-title {
@@ -116,4 +116,3 @@
 .timeline-circle {
   @apply absolute w-4 h-4 rounded-full bg-primary border-4 border-background z-10;
 }
-

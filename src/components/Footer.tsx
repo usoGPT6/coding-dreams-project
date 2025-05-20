@@ -14,7 +14,7 @@ const Footer = () => {
             className="h-6 w-6"
           />
         </div>
-        <div className="text-sm text-muted-blue-gray">
+        <div className="text-sm text-light-cyan">
           © {currentYear} Eduardo A Lins. All rights reserved.
         </div>
       </div>
