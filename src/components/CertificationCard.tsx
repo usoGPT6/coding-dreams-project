@@ -8,7 +8,7 @@ interface CertificationCardProps {
 
 const CertificationCard = ({ title, description }: CertificationCardProps) => {
   return (
-    <div className="bg-dark-blue-gray p-5 rounded-lg h-full border border-light-gray">
+    <div className="bg-dark-blue-gray p-5 rounded-lg h-full border border-dark-navy">
       <h3 className="text-lg font-medium mb-2 text-light-gray">{title}</h3>
       <p className="text-sm text-light-gray">{description}</p>
     </div>
