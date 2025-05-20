@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-dark-navy">
       <Navbar />
-      <main className="flex-grow flex flex-col">
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />
