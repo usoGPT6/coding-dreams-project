@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
@@ -6,6 +7,10 @@ import SkillSection from '../components/SkillSection';
 import TypingAnimation from '../components/TypingAnimation';
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "Eduardoalins";
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
