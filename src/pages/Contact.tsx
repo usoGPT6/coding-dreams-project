@@ -38,8 +38,8 @@ const Contact = () => {
   const copyEmail = () => {
     navigator.clipboard.writeText('dudu.a.lins@gmail.com');
     toast({
-      title: "Email Copiado!",
-      description: "Endereço de email copiado para a área de transferência",
+      title: "Email Copied!",
+      description: "Email address copied to clipboard",
     });
   };
 
@@ -60,8 +60,8 @@ const Contact = () => {
     
     if (!validateForm()) {
       toast({
-        title: "Formulário incompleto",
-        description: "Por favor, preencha todos os campos corretamente",
+        title: "Form incomplete",
+        description: "Please fill in all fields correctly",
         variant: "destructive"
       });
       return;
@@ -70,11 +70,10 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Usando Formspree para envio de emails
-      const response = await fetch('https://formspree.io/f/xdkobgqp', {
+      // Using EmailJS as a reliable email service
+      const response = await fetch('https://formspree.io/f/xdkonnpe', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -82,14 +81,14 @@ const Contact = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          _replyto: formData.email
+          _replyto: formData.email,
         }),
       });
 
       if (response.ok) {
         toast({
-          title: "Mensagem Enviada com Sucesso!",
-          description: `Obrigado ${formData.name}, sua mensagem foi recebida. Retornarei em breve!`,
+          title: "Message Sent Successfully!",
+          description: `Thanks ${formData.name}, your message has been sent to dudu.a.lins@gmail.com`,
         });
         
         // Reset form
@@ -100,15 +99,13 @@ const Contact = () => {
           message: ''
         });
       } else {
-        throw new Error('Falha no envio');
+        throw new Error('Failed to send message');
       }
-
     } catch (error) {
-      console.error('Erro ao enviar email:', error);
-      
+      console.error('Error sending email:', error);
       toast({
-        title: "Erro no Envio",
-        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente ou entre em contato diretamente pelo email dudu.a.lins@gmail.com",
+        title: "Error sending message",
+        description: "There was a problem sending your message. Please try again or contact directly at dudu.a.lins@gmail.com",
         variant: "destructive"
       });
     } finally {
@@ -184,10 +181,10 @@ const Contact = () => {
                       placeholder="Name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full bg-dark-navy border ${formErrors.name ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
+                      className={`w-full bg-dark-navy border ${formErrors.name ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
                       disabled={isSubmitting}
                     />
-                    {formErrors.name && <p className="text-red-500 text-xs mt-1">Nome é obrigatório</p>}
+                    {formErrors.name && <p className="text-red-500 text-xs mt-1">Name is required</p>}
                   </div>
                   
                   <div>
@@ -197,10 +194,10 @@ const Contact = () => {
                       placeholder="E-mail"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full bg-dark-navy border ${formErrors.email ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
+                      className={`w-full bg-dark-navy border ${formErrors.email ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
                       disabled={isSubmitting}
                     />
-                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Email válido é obrigatório</p>}
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Valid email is required</p>}
                   </div>
                 </div>
                 
@@ -211,23 +208,23 @@ const Contact = () => {
                     placeholder="Subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className={`w-full bg-dark-navy border ${formErrors.subject ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
+                    className={`w-full bg-dark-navy border ${formErrors.subject ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
                     disabled={isSubmitting}
                   />
-                  {formErrors.subject && <p className="text-red-500 text-xs mt-1">Assunto é obrigatório</p>}
+                  {formErrors.subject && <p className="text-red-500 text-xs mt-1">Subject is required</p>}
                 </div>
                 
                 <div>
                   <textarea
                     name="message"
-                    placeholder="Your message here..."
+                    placeholder="Message"
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={5}
-                    className={`w-full bg-dark-navy border ${formErrors.message ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray resize-vertical`}
+                    className={`w-full bg-dark-navy border ${formErrors.message ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
                     disabled={isSubmitting}
                   />
-                  {formErrors.message && <p className="text-red-500 text-xs mt-1">Mensagem é obrigatória</p>}
+                  {formErrors.message && <p className="text-red-500 text-xs mt-1">Message is required</p>}
                 </div>
                 
                 <div className="text-right">
@@ -236,7 +233,7 @@ const Contact = () => {
                     disabled={isSubmitting}
                     className="bg-dark-navy hover:bg-dark-blue transition-colors duration-200 px-6 py-3 rounded text-light-cyan border border-light-cyan disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Enviando...' : 'Send Message'}
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
               </form>
