@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Github, Linkedin } from 'lucide-react';
@@ -37,8 +38,8 @@ const Contact = () => {
   const copyEmail = () => {
     navigator.clipboard.writeText('dudu.a.lins@gmail.com');
     toast({
-      title: "Email Copied!",
-      description: "Email address copied to clipboard",
+      title: "Email Copiado!",
+      description: "Endereço de email copiado para a área de transferência",
     });
   };
 
@@ -59,8 +60,8 @@ const Contact = () => {
     
     if (!validateForm()) {
       toast({
-        title: "Form incomplete",
-        description: "Please fill in all fields correctly",
+        title: "Formulário incompleto",
+        description: "Por favor, preencha todos os campos corretamente",
         variant: "destructive"
       });
       return;
@@ -69,63 +70,46 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Using EmailJS service with a working endpoint
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      // Usando Formspree para envio de emails
+      const response = await fetch('https://formspree.io/f/xdkobgqp', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          service_id: 'default_service',
-          template_id: 'template_contact',
-          user_id: 'public_key',
-          template_params: {
-            from_name: formData.name,
-            from_email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-            to_email: 'dudu.a.lins@gmail.com'
-          }
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email
         }),
       });
 
-      // For demo purposes, we'll simulate a successful submission
-      // In a real scenario, you'd need to set up EmailJS properly
-      console.log('Form data being sent:', {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      });
-
-      toast({
-        title: "Message Sent Successfully!",
-        description: `Thanks ${formData.name}, your message has been received. I'll get back to you soon!`,
-      });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      if (response.ok) {
+        toast({
+          title: "Mensagem Enviada com Sucesso!",
+          description: `Obrigado ${formData.name}, sua mensagem foi recebida. Retornarei em breve!`,
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Falha no envio');
+      }
 
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Erro ao enviar email:', error);
       
-      // For now, we'll show success since this is a portfolio demo
       toast({
-        title: "Message Received!",
-        description: `Thanks ${formData.name}! Your message has been logged. Please also feel free to contact directly at dudu.a.lins@gmail.com`,
-      });
-      
-      // Reset form even on "error" for demo purposes
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+        title: "Erro no Envio",
+        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente ou entre em contato diretamente pelo email dudu.a.lins@gmail.com",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
@@ -203,7 +187,7 @@ const Contact = () => {
                       className={`w-full bg-dark-navy border ${formErrors.name ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
                       disabled={isSubmitting}
                     />
-                    {formErrors.name && <p className="text-red-500 text-xs mt-1">Name is required</p>}
+                    {formErrors.name && <p className="text-red-500 text-xs mt-1">Nome é obrigatório</p>}
                   </div>
                   
                   <div>
@@ -216,7 +200,7 @@ const Contact = () => {
                       className={`w-full bg-dark-navy border ${formErrors.email ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
                       disabled={isSubmitting}
                     />
-                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Valid email is required</p>}
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Email válido é obrigatório</p>}
                   </div>
                 </div>
                 
@@ -230,7 +214,7 @@ const Contact = () => {
                     className={`w-full bg-dark-navy border ${formErrors.subject ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray`}
                     disabled={isSubmitting}
                   />
-                  {formErrors.subject && <p className="text-red-500 text-xs mt-1">Subject is required</p>}
+                  {formErrors.subject && <p className="text-red-500 text-xs mt-1">Assunto é obrigatório</p>}
                 </div>
                 
                 <div>
@@ -243,7 +227,7 @@ const Contact = () => {
                     className={`w-full bg-dark-navy border ${formErrors.message ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray placeholder:text-muted-blue-gray resize-vertical`}
                     disabled={isSubmitting}
                   />
-                  {formErrors.message && <p className="text-red-500 text-xs mt-1">Message is required</p>}
+                  {formErrors.message && <p className="text-red-500 text-xs mt-1">Mensagem é obrigatória</p>}
                 </div>
                 
                 <div className="text-right">
@@ -252,7 +236,7 @@ const Contact = () => {
                     disabled={isSubmitting}
                     className="bg-dark-navy hover:bg-dark-blue transition-colors duration-200 px-6 py-3 rounded text-light-cyan border border-light-cyan disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? 'Enviando...' : 'Send Message'}
                   </button>
                 </div>
               </form>
