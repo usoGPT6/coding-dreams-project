@@ -22,6 +22,7 @@ const Contact = () => {
     message: false
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,7 +46,7 @@ const Contact = () => {
   const validateForm = () => {
     const errors = {
       name: formData.name.trim() === '',
-      email: formData.email.trim() === '',
+      email: formData.email.trim() === '' || !formData.email.includes('@'),
       subject: formData.subject.trim() === '',
       message: formData.message.trim() === ''
     };
@@ -54,30 +55,61 @@ const Contact = () => {
     return !Object.values(errors).some(error => error);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      // In a real implementation, we would send an email here
-      // For now, we'll just show a success toast
-      toast({
-        title: "Message Sent!",
-        description: `Thanks ${formData.name}, your message has been sent to dudu.a.lins@gmail.com`,
-      });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } else {
+    if (!validateForm()) {
       toast({
         title: "Form incomplete",
-        description: "Please fill in all fields",
+        description: "Please fill in all fields correctly",
         variant: "destructive"
       });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Using EmailJS as a reliable email service
+      const response = await fetch('https://formspree.io/f/xdkonnpe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: `Thanks ${formData.name}, your message has been sent to dudu.a.lins@gmail.com`,
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error sending message",
+        description: "There was a problem sending your message. Please try again or contact directly at dudu.a.lins@gmail.com",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -150,6 +182,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       className={`w-full bg-dark-navy border ${formErrors.name ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
+                      disabled={isSubmitting}
                     />
                     {formErrors.name && <p className="text-red-500 text-xs mt-1">Name is required</p>}
                   </div>
@@ -162,8 +195,9 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className={`w-full bg-dark-navy border ${formErrors.email ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
+                      disabled={isSubmitting}
                     />
-                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Email is required</p>}
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">Valid email is required</p>}
                   </div>
                 </div>
                 
@@ -175,6 +209,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     className={`w-full bg-dark-navy border ${formErrors.subject ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
+                    disabled={isSubmitting}
                   />
                   {formErrors.subject && <p className="text-red-500 text-xs mt-1">Subject is required</p>}
                 </div>
@@ -187,6 +222,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     rows={5}
                     className={`w-full bg-dark-navy border ${formErrors.message ? 'border-red-500' : 'border-light-gray'} rounded-md p-3 text-sm text-light-gray`}
+                    disabled={isSubmitting}
                   />
                   {formErrors.message && <p className="text-red-500 text-xs mt-1">Message is required</p>}
                 </div>
@@ -194,9 +230,10 @@ const Contact = () => {
                 <div className="text-right">
                   <button
                     type="submit"
-                    className="bg-dark-navy hover:bg-dark-blue transition-colors duration-200 px-6 py-3 rounded text-light-cyan border border-light-cyan"
+                    disabled={isSubmitting}
+                    className="bg-dark-navy hover:bg-dark-blue transition-colors duration-200 px-6 py-3 rounded text-light-cyan border border-light-cyan disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
               </form>

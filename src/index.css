@@ -87,33 +87,6 @@
   @apply text-3xl font-bold mb-2 md:text-4xl text-light-cyan;
 }
 
-.typing-animation {
-  overflow: hidden;
-  border-right: 2px solid white;
-  white-space: nowrap;
-  margin: 0 auto;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: white;
-  }
-}
-
 .timeline-line {
   @apply absolute left-9 top-8 h-full w-0.5 bg-border;
 }
